@@ -1,4 +1,5 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import type { Sections } from "../types";
 
 interface Props {
@@ -12,7 +13,9 @@ const Flashcards: React.FC<Props> = ({ sections }) => {
       {Object.keys(sections).map((section) => (
         <div key={section} className="p-4 border rounded bg-white shadow my-2">
           <h3 className="font-bold">{section}</h3>
-          <p className="mt-2 whitespace-pre-wrap">{sections[section].flashcards}</p>
+          <div className="mt-2 prose prose-invert max-w-none text-orange-100">
+            <ReactMarkdown>{sections[section].flashcards}</ReactMarkdown>
+          </div>
         </div>
       ))}
     </div>

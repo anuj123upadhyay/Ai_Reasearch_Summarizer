@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { askQuestion } from "../api";
 
 interface Props {
@@ -34,7 +35,9 @@ const QnA: React.FC<Props> = ({ context }) => {
       {answer && (
         <div className="mt-4">
           <h3 className="font-semibold">Answer:</h3>
-          <p>{answer}</p>
+          <div className="prose prose-invert max-w-none text-orange-100">
+            <ReactMarkdown>{answer}</ReactMarkdown>
+          </div>
         </div>
       )}
     </div>

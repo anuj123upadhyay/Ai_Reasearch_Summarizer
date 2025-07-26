@@ -1,0 +1,40 @@
+/* Dark theme and orange accent custom styles */
+body {
+  background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
+  color: #ffa726;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.text-orange-400 {
+  color: #ffa726;
+}
+.text-orange-500 {
+  color: #ff9800;
+}
+.bg-gray-800 {
+  background-color: #23272f;
+}
+.border-gray-700 {
+  border-color: #393e46;
+}
+.rounded-xl {
+  border-radius: 1rem;
+}
+.shadow-lg {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+}
+.drop-shadow-lg {
+  filter: drop-shadow(0 4px 16px #ff9800aa);
+}
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
