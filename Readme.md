@@ -37,7 +37,7 @@ Built for **Data Hack by MLH** with **React + TypeScript + Vite** (frontend) and
 
 ```mermaid
 graph LR
-    A[Frontend (React + Vite)] -->|HTTP| B[Backend (FastAPI)]
+    A[Frontend (React/Vite)] -->|HTTP| B[Backend (FastAPI)]
     B -->|Gemini API| C[Google Gemini 2.5 Pro]
     B -->|PDF Parsing| D[PDFMiner]
     A -->|User| E[Browser]
