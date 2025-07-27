@@ -22,7 +22,8 @@ const MindMap: React.FC<MindMapProps> = ({ data }) => {
     // nodes should be array of objects: [{id: string}]
     // edges: [{from: string, to: string}]
     const { nodes, edges } = parsedData;
-    const width = 600;
+    // Responsive width/height
+    const width = svgRef.current.parentElement?.offsetWidth || 600;
     const height = 400;
 
     // Convert nodes to objects if they are strings
@@ -46,7 +47,9 @@ const MindMap: React.FC<MindMapProps> = ({ data }) => {
     const svg = d3
       .select(svgRef.current)
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", height)
+      .style("background", "#18181b")
+      .style("border-radius", "1rem");
 
     const simulation = d3
       .forceSimulation(nodeObjects)
@@ -63,12 +66,13 @@ const MindMap: React.FC<MindMapProps> = ({ data }) => {
     // Draw links
     const link = svg
       .append("g")
-      .attr("stroke", "#aaa")
+      .attr("stroke", "#ff9800")
+      .attr("stroke-opacity", 0.7)
       .selectAll("line")
       .data(edgeObjects)
       .enter()
       .append("line")
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 2.5);
 
     // Draw nodes
     const node = svg
@@ -77,25 +81,36 @@ const MindMap: React.FC<MindMapProps> = ({ data }) => {
       .data(nodeObjects)
       .enter()
       .append("circle")
-      .attr("r", 20)
-      .attr("fill", "#4f46e5")
+      .attr("r", 22)
+      .attr("fill", "#23272f")
+      .attr("stroke", "#ff9800")
+      .attr("stroke-width", 3)
       .call(
         d3
           .drag<SVGCircleElement, any>()
-          .on("start", (event, d) => {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
-            d.fx = d.x;
-            d.fy = d.y;
-          })
-          .on("drag", (event, d) => {
-            d.fx = event.x;
-            d.fy = event.y;
-          })
-          .on("end", (event, d) => {
-            if (!event.active) simulation.alphaTarget(0);
-            d.fx = null;
-            d.fy = null;
-          })
+          .on(
+            "start",
+            (event: d3.D3DragEvent<SVGCircleElement, any, any>, d: any) => {
+              if (!event.active) simulation.alphaTarget(0.3).restart();
+              d.fx = d.x;
+              d.fy = d.y;
+            }
+          )
+          .on(
+            "drag",
+            (event: d3.D3DragEvent<SVGCircleElement, any, any>, d: any) => {
+              d.fx = event.x;
+              d.fy = event.y;
+            }
+          )
+          .on(
+            "end",
+            (event: d3.D3DragEvent<SVGCircleElement, any, any>, d: any) => {
+              if (!event.active) simulation.alphaTarget(0);
+              d.fx = null;
+              d.fy = null;
+            }
+          )
       );
 
     // Add labels
@@ -106,8 +121,9 @@ const MindMap: React.FC<MindMapProps> = ({ data }) => {
       .enter()
       .append("text")
       .text((d: any) => d.id)
-      .attr("font-size", 14)
-      .attr("fill", "#fff")
+      .attr("font-size", 15)
+      .attr("fill", "#ffa726")
+      .attr("font-weight", 600)
       .attr("text-anchor", "middle")
       .attr("dy", ".35em");
 
@@ -129,9 +145,17 @@ const MindMap: React.FC<MindMapProps> = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="mt-6 p-4 bg-white border rounded shadow">
-      <h2 className="text-xl font-bold mb-4">Mind Map</h2>
-      <svg ref={svgRef}></svg>
+    <div className="mt-6 p-4 bg-[#23272f] border border-gray-700 rounded-2xl shadow-lg text-orange-100">
+      <h2 className="text-xl font-bold mb-4 text-orange-400">Mind Map</h2>
+      <svg
+        ref={svgRef}
+        style={{
+          width: "100%",
+          height: 400,
+          display: "block",
+          margin: "0 auto",
+        }}
+      ></svg>
     </div>
   );
 };

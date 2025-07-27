@@ -8,10 +8,12 @@ interface Props {
 
 const FileUpload: React.FC<Props> = ({ setData }) => {
   const [loading, setLoading] = useState(false);
+  const [fileName, setFileName] = useState<string | null>(null);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setFileName(file.name);
     setLoading(true);
     try {
       const res = await uploadPDF(file);
@@ -52,6 +54,11 @@ const FileUpload: React.FC<Props> = ({ setData }) => {
           className="hidden"
         />
       </label>
+      {fileName && (
+        <p className="text-orange-300 text-xs mt-1 truncate max-w-full">
+          Selected: <span className="font-semibold">{fileName}</span>
+        </p>
+      )}
       {loading && (
         <p className="text-orange-400 text-sm mt-2 animate-pulse">
           Processing...

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import FileUpload from "./components/FileUpload";
 import SummaryView from "./components/SummaryView";
 import Flashcards from "./components/Flashcards";
-import QnA from "./components/QnA";
 import MindMap from "./components/MindMap";
 import type { Sections } from "./types";
 import ChatGemini from "./components/ChatGemini";
@@ -38,16 +37,20 @@ const App: React.FC = () => {
             <Flashcards sections={data} />
           </div>
 
-          {/* Q&A Section */}
-          <div className="bg-[#23272f] rounded-2xl shadow-lg p-4 sm:p-8 border border-gray-700 transition-all duration-300">
-            <QnA context={JSON.stringify(data)} />
-          </div>
-
-          {/* Mind Map Visualization (Abstract section as example) */}
-          {data["Abstract"]?.mindmap && (
-            <div className="bg-[#23272f] rounded-2xl shadow-lg p-4 sm:p-8 border border-gray-700 transition-all duration-300">
-              <MindMap data={data["Abstract"].mindmap} />
-            </div>
+          {/* Mind Map Visualization (show for all sections with mindmap) */}
+          {Object.entries(data).map(
+            ([section, sectionData]) =>
+              sectionData.mindmap && (
+                <div
+                  key={section + "-mindmap"}
+                  className="bg-[#23272f] rounded-2xl shadow-lg p-4 sm:p-8 border border-gray-700 transition-all duration-300"
+                >
+                  <h3 className="text-lg font-bold text-orange-400 mb-2">
+                    {section} Mind Map
+                  </h3>
+                  <MindMap data={sectionData.mindmap} />
+                </div>
+              )
           )}
 
           {/* Chat-like Gemini Interface */}

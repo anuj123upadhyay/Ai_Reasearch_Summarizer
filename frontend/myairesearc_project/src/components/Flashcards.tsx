@@ -9,10 +9,13 @@ interface Props {
 const Flashcards: React.FC<Props> = ({ sections }) => {
   return (
     <div className="mt-6">
-      <h2 className="text-2xl font-bold mb-4">Flashcards</h2>
+      <h2 className="text-2xl font-bold mb-4 text-orange-400">Flashcards</h2>
       {Object.keys(sections).map((section) => (
-        <div key={section} className="p-4 border rounded bg-white shadow my-2">
-          <h3 className="font-bold">{section}</h3>
+        <div
+          key={section}
+          className="p-4 border border-gray-700 rounded-2xl bg-[#23272f] shadow-lg my-2 text-orange-100"
+        >
+          <h3 className="font-bold text-orange-300">{section}</h3>
           <div className="mt-2 prose prose-invert max-w-none text-orange-100">
             <ReactMarkdown>{sections[section].flashcards}</ReactMarkdown>
           </div>
