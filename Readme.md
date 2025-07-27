@@ -4,7 +4,6 @@ A full-stack AI-powered platform to **upload research papers (PDF)** and instant
 - ✨ Section-wise summaries
 - ✨ Simplified explanations
 - ✨ Flashcards for revision
-- ✨ Mind map visualizations
 - ✨ Chat-like Q&A powered by Gemini 2.5 Pro
 
 Built for **Data Hack by MLH** with **React + TypeScript + Vite** (frontend) and **FastAPI** (backend), leveraging Google Gemini for advanced AI features.
@@ -17,7 +16,6 @@ Built for **Data Hack by MLH** with **React + TypeScript + Vite** (frontend) and
 - **Section Summaries:** Get concise bullet-point summaries for each section.
 - **Simplified Text:** AI-generated, student-friendly explanations.
 - **Flashcards:** Auto-generated Q&A flashcards for revision.
-- **Mind Map:** Visualize the structure and key concepts of the paper.
 - **AI Chat:** Ask questions about the paper in a chat interface, powered by Gemini 2.5 Pro.
 - **Modern UI:** Responsive, clean, and easy to use.
 
@@ -82,9 +80,17 @@ cd airesearch
 ### 2. Backend Setup
 
 ```bash
+# MacOS
 cd backend
 python3 -m venv venv
 source venv/bin/activate
+pip install -r requirements.txt
+
+
+# Windows
+python -m venv venv
+
+venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -125,7 +131,7 @@ sequenceDiagram
     BE->>AI: Summarize, simplify, flashcards, mindmap (per section)
     AI-->>BE: AI-generated content
     BE-->>FE: JSON with summaries, flashcards, mindmap, etc.
-    FE-->>U: Display summaries, flashcards, mindmap, chat
+    FE-->>U: Display summaries, flashcards, chat
     U->>FE: Ask question in chat
     FE->>BE: POST /ask-question/ (question + context)
     BE->>AI: Get answer from Gemini
@@ -175,6 +181,18 @@ MIT License
 - [Vite](https://vitejs.dev/)
 - [Major League Hacking (MLH)](https://mlh.io/)
 
+
+## Contribution
+
+We welcome contributions from the community! To contribute:
+
+1. **Fork the repository** and create your branch from `main` or the latest feature branch.
+2. **Clone your fork** and set up the project locally.
+3. **Make your changes** (code, tests, etc.).
+4. **Test thoroughly** to ensure nothing is broken.
+5. **Commit and push** your changes to your fork.
+6. **Open a Pull Request** with a clear description of your changes and reference any related issues.
+
 ---
 
-> **Made with ❤️ for Data Hack by MLH and AI-powered research!**
+> **Made with ❤️ for Data Hack by MLH and AI-powered!**
